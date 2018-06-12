@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8"/>
-    <title>Spring Framework Guru</title>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <title>Books</title>
+    <th:block th:include="layout/header"></th:block>
 </head>
 <body>
-<h1>Authors List</h1>
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>First name</th>
-        <th>Last name</th>
-    </tr>
-    <tr th:each="author : ${authors}">
-        <td th:text="${author.id}">123</td>
-        <td th:text="${author.firstName}">Ahmed</td>
-        <td th:text="${author.lastName}">Elghobary</td>
-    </tr>
-</table>
-
+<div class="container">
+    <div th:if="${not #lists.isEmpty(authors)}">
+        <h2>All Authors</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            <tr th:each="author : ${authors}">
+                <td th:text="${author.id}">Id</td>
+                <td th:text="${author.firstName}">First Name</td>
+                <td th:text="${author.lastName}">Last name</td>
+                <td><a th:href="${'/authors/edit/' + author.id}" class="btn btn-default">Edit</a></td>
+                <td><a th:href="${'/authors/delete/' + author.id}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        </table>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2">
+            <a th:href="@{/authors/add}">Add Author</a>
+        </div>
+    </div>
+</div>
 </body>
 </html>

@@ -49,7 +49,7 @@ public class BookController {
     }
 
     @RequestMapping(path = "/books/edit/{id}")
-    public String createBook(Model model, @PathVariable(value = "id") Long id){
+    public String updateBook(Model model, @PathVariable(value = "id") Long id){
 
         Book book = bookRepository.findById(id).get();
         model.addAttribute("book", book);
